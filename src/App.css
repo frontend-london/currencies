@@ -1,0 +1,87 @@
+h2 {
+  text-align: center;
+}
+
+table {
+  margin: 0 auto;
+  width: 350px;
+}
+
+table th {
+  cursor: pointer;
+  font-weight: 500;
+}
+
+table td.symbol {
+  display: flex;
+  align-items: center;
+}
+
+table th:hover {
+  text-decoration: underline;
+}
+
+table th.active {
+  font-weight: 700;
+}
+
+table th.active:after {
+  content: 	" \2193";
+}
+
+table th.active.up:after {
+  content: 	" \2191";
+}
+
+table td:nth-child(3) {
+  text-align: center;
+}
+
+.flag {
+  width: 48px;
+  margin: 0 5px;
+  border: 1px dotted silver;
+}
+
+.price {
+  font-weight: 500;
+  color: #A9A9A9;
+}
+
+
+.price-down--0 { color: #ff7f7f; }
+.price-down--1 { color: #ff6666; }
+.price-down--2 { color: #ff4c4c; }
+.price-down--3 { color: #ff3232; }
+.price-down--4 { color: #ff1919; }
+.price-down--5, 
+.price-down--6, 
+.price-down--7, 
+.price-down--8 { color: #ff0000; }
+
+.price-up--0 { color: #7fff7f; }
+.price-up--1 { color: #66ff66; }
+.price-up--2 { color: #4cff4c; }
+.price-up--3 { color: #32ff32; }
+.price-up--4 { color: #19ff19; }
+.price-up--5, 
+.price-up--6,
+.price-up--7,
+.price-up--8 { color: #00ff00; }
+
+.price-up--5, .price-down--5 { font-weight: 600 }
+.price-up--6, .price-down--6 { font-weight: 700 }
+.price-up--7, .price-down--7 { font-weight: 800 }
+.price-up--8, .price-down--8 { font-weight: 900 }
+
+
+
+.dayNav {
+  text-align: center; 
+  margin-bottom: 20px;
+}
+
+.dayNav button {
+  width: 130px;
+  margin: 0 10px;
+}

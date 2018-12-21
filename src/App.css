@@ -85,3 +85,13 @@ table td:nth-child(3) {
   width: 130px;
   margin: 0 10px;
 }
+
+.search {  
+  text-align: center;
+  margin: 0 auto;
+  max-width: 200px;
+}
+
+.search .currencyName {
+  text-transform: uppercase;
+}

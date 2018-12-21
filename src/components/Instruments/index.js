@@ -12,7 +12,8 @@ class Instruments extends Component {
       currentDate: null, 
       minDate: null,
       maxDate: null,
-      sortUp: false 
+      sortUp: false, 
+      search: null
     };
     this.fetchUpdates();
   }
@@ -56,6 +57,7 @@ class Instruments extends Component {
   getChanges = ()  => {
     let prevDate = this.getPrevDay(this.state.currentDate),
       prevDay = this.state.days[prevDate],
+      search = this.state.search,
       currDay = this.state.days[this.state.currentDate],
       changes = [];
 
@@ -67,7 +69,11 @@ class Instruments extends Component {
           classNameId = Math.min(Math.round(Math.abs(perChange)), 8),
           className = 'price ' + ((change > 0) ? 'price-up--' + classNameId : (change < 0) ? 'price-down--' + classNameId : '');
           
-        changes.push({className, currency, rate, change, perChange});
+          if (!search || search.split(',').find((el) => {
+            return currency.includes(el);
+          })) {
+            changes.push({className, currency, rate, change, perChange});  
+          }
       });
 
       changes.sort(this.compareChanges);
@@ -118,20 +124,30 @@ class Instruments extends Component {
     return className;
   }
 
+  handleCurrencyNameChange = (e) => {
+    this.setState({search: e.currentTarget.value.toUpperCase()})
+  }
+
   render() {
     let changes = this.getChanges();
 
     return (
       <div>
         <h2>Currencies on {this.state.currentDate}</h2>
-        <div className="dayNav">
+        <div className="search">
+          <form>
+            <label className="sr-only" htmlFor="currencyName">Find currency</label>
+            <input type="text" className="form-control mb-2 mr-sm-2 currencyName" id="currencyName" placeholder="E.g. GBP,PLN" onChange={this.handleCurrencyNameChange} />
+          </form>
+        </div>
+        <nav className="dayNav" role="group" aria-label="Change date">
           {this.state.currentDate !== Object.keys(this.state.days)[1] && (
-            <button onClick={this.handlePrevDayClick}>&larr; Previous day</button>
+            <button type="button" className="btn btn-secondary" onClick={this.handlePrevDayClick}>&larr; Previous day</button>
           )}
           {this.state.currentDate !== Object.keys(this.state.days)[Object.keys(this.state.days).length - 1] && (
-            <button onClick={this.handleNextDayClick}>Next day &rarr;</button>
+            <button type="button" className="btn btn-secondary" onClick={this.handleNextDayClick}>Next day &rarr;</button>
           )}
-        </div>
+        </nav>
         <table>
           <thead>
             <tr>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import * as api from '../../api';
 import InstrumentsRow from './row';
+import Pagination from "react-js-pagination";
 
 class Instruments extends Component {
 
@@ -8,6 +9,7 @@ class Instruments extends Component {
     super(props);
     this.state = { 
       days: [], 
+      activePage: 1,
       sortBy: 'currency', 
       currentDate: null, 
       minDate: null,
@@ -125,10 +127,15 @@ class Instruments extends Component {
   }
 
   handleCurrencyNameChange = (e) => {
-    this.setState({search: e.currentTarget.value.toUpperCase()})
+    this.setState({activePage: 1, search: e.currentTarget.value.toUpperCase()})
+  }
+
+  handlePageChange = (page) => {
+    this.setState({activePage: page})
   }
 
   render() {
+    const currenciesPerPage = 20;
     let changes = this.getChanges();
 
     return (
@@ -142,10 +149,10 @@ class Instruments extends Component {
         </div>
         <nav className="dayNav" role="group" aria-label="Change date">
           {this.state.currentDate !== Object.keys(this.state.days)[1] && (
-            <button type="button" className="btn btn-secondary" onClick={this.handlePrevDayClick}>&larr; Previous day</button>
+            <button type="button" className="btn btn-primary" onClick={this.handlePrevDayClick}>&larr; Previous day</button>
           )}
           {this.state.currentDate !== Object.keys(this.state.days)[Object.keys(this.state.days).length - 1] && (
-            <button type="button" className="btn btn-secondary" onClick={this.handleNextDayClick}>Next day &rarr;</button>
+            <button type="button" className="btn btn-primary" onClick={this.handleNextDayClick}>Next day &rarr;</button>
           )}
         </nav>
         <table>
@@ -157,13 +164,37 @@ class Instruments extends Component {
             </tr>
           </thead>
           <tbody>
-            {changes.map((row, i) => 
+            {changes.slice(currenciesPerPage * (this.state.activePage - 1), currenciesPerPage * this.state.activePage).map((row, i) => 
               <InstrumentsRow
                 row={row}
                 key={row.currency}
               />
             )}
           </tbody>
+          {(changes.length > currenciesPerPage) && (
+            <tfoot>
+              <tr>
+                <td colspan="3">
+                  <nav className="currencies-pages">
+                    <Pagination
+                      activePage={this.state.activePage}
+                      itemsCountPerPage={currenciesPerPage}
+                      totalItemsCount={changes.length}
+                      pageRangeDisplayed={5}
+                      onChange={(pageNumber) => this.handlePageChange(pageNumber)}
+                      hideDisabled={true}
+                      nextPageText="&raquo;"
+                      prevPageText="&laquo;"
+                      hideFirstLastPages={true}
+                      itemClass="page-item"
+                      linkClass="page-link"
+                      innerClass="pagination justify-content-center"
+                    />
+                  </nav>
+                </td>
+              </tr>
+            </tfoot>
+          )}
         </table>
       </div>
     )

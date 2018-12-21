@@ -10,6 +10,8 @@ table {
 table th {
   cursor: pointer;
   font-weight: 500;
+  font-size: 17px;
+  padding-bottom: 10px;
 }
 
 table td.symbol {
@@ -94,4 +96,40 @@ table td:nth-child(3) {
 
 .search .currencyName {
   text-transform: uppercase;
+}
+
+.currencies-pages {
+  margin: 20px auto 0;
+  width: 100%;
+}
+
+.currencies-pages .page-link {
+  font-size: 20px;
+  background: none;
+  border: none;
+  line-height: 25px;
+  color: #080808;
+}
+
+.currencies-pages .page-link:focus {
+  box-shadow: none;
+}
+
+.currencies-pages .page-link:hover {
+  font-weight: bold;
+}
+
+.currencies-pages .page-item.disabled {
+  cursor: not-allowed;
+}
+
+.currencies-pages .page-item.disabled .page-link {
+  background: none; 
+  font-size:25px;
+  cursor: not-allowed;
+}
+
+.currencies-pages .page-item.active .page-link {
+  background-color: #3367d6;
+  border: none;
 }

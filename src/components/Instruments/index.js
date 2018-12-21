@@ -11,7 +11,7 @@ class Instruments extends Component {
       days: [], 
       activePage: 1,
       sortBy: 'currency', 
-      currentDate: null, 
+      currentDate: '', 
       minDate: null,
       maxDate: null,
       sortUp: false, 
@@ -26,12 +26,18 @@ class Instruments extends Component {
   }
 
   getPrevDay(date) {    
+    if (!date) {
+      return false;
+    }
     let prev  = new Date(date);
     prev.setDate(prev.getDate() - 1);
     return this.formatDate(prev);
   }
   
   getNextDay(date) {
+    if (!date) {
+      return false;
+    }
     let next  = new Date(date);
     next.setDate(next.getDate() + 1);
     return this.formatDate(next);
@@ -139,12 +145,23 @@ class Instruments extends Component {
     this.setState({perPage: parseInt(e.currentTarget.value)});
   }
 
+  handleCurrentDateChange = (e) => {
+    this.setState({currentDate: e.currentTarget.value});
+  }
+
   render() {
-    let changes = this.getChanges();
+    const changes = this.getChanges();
 
     return (
       <div>
-        <h2>Currencies on {this.state.currentDate}</h2>
+        <header className="header">
+          <span className="headerTitle">Currencies on</span>
+          <select value={this.state.currentDate} className="currentDate custom-select" onChange={this.handleCurrentDateChange}>
+            {Object.keys(this.state.days).slice(1).map((row, i) => 
+              <option key={row}>{row}</option>
+            )}
+            </select>
+        </header>
         <div className="search">
           <form className="form-inline">
             <label className="sr-only" htmlFor="currencyName">Find currency</label>

@@ -91,7 +91,7 @@ table td:nth-child(3) {
 .search {  
   text-align: center;
   margin: 0 auto;
-  max-width: 350px;
+  max-width: 390px;
 }
 
 .search .currencyName {
@@ -101,6 +101,10 @@ table td:nth-child(3) {
 
 .search .selectPagination {
   max-width: 150px;
+}
+
+.search .currencyCounter {
+  padding-bottom: 10px;
 }
 
 .currencies-pages {

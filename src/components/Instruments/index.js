@@ -16,7 +16,7 @@ class Instruments extends Component {
       maxDate: null,
       sortUp: false, 
       search: null,
-      perPage: 20
+      perPage: 15
     };
     this.fetchUpdates();
   }
@@ -168,9 +168,14 @@ class Instruments extends Component {
             <input type="text" className="form-control mb-2 mr-sm-2 currencyName" id="currencyName" placeholder="E.g. GBP,PLN" onChange={this.handleCurrencyNameChange} />
             <select defaultValue={this.state.perPage} className="selectPagination mb-2 mr-sm-2 custom-select" onChange={this.handlePerPageChange}>
               <option value="10">10 per page</option>
+              <option value="15">15 per page</option>
               <option value="20">20 per page</option>
               <option value="40">40 per page</option>
-            </select>
+              <option value="80">80 per page</option>
+            </select> 
+            <span className="currencyCounter">
+              of {changes.length}
+            </span>
           </form>
         </div>
         <nav className="dayNav" role="group" aria-label="Change date">

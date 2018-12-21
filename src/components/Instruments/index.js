@@ -15,7 +15,8 @@ class Instruments extends Component {
       minDate: null,
       maxDate: null,
       sortUp: false, 
-      search: null
+      search: null,
+      perPage: 20
     };
     this.fetchUpdates();
   }
@@ -134,17 +135,25 @@ class Instruments extends Component {
     this.setState({activePage: page})
   }
 
+  handlePerPageChange = (e) => {
+    this.setState({perPage: parseInt(e.currentTarget.value)});
+  }
+
   render() {
-    const currenciesPerPage = 20;
     let changes = this.getChanges();
 
     return (
       <div>
         <h2>Currencies on {this.state.currentDate}</h2>
         <div className="search">
-          <form>
+          <form className="form-inline">
             <label className="sr-only" htmlFor="currencyName">Find currency</label>
             <input type="text" className="form-control mb-2 mr-sm-2 currencyName" id="currencyName" placeholder="E.g. GBP,PLN" onChange={this.handleCurrencyNameChange} />
+            <select defaultValue={this.state.perPage} className="selectPagination mb-2 mr-sm-2 custom-select" onChange={this.handlePerPageChange}>
+              <option value="10">10 per page</option>
+              <option value="20">20 per page</option>
+              <option value="40">40 per page</option>
+            </select>
           </form>
         </div>
         <nav className="dayNav" role="group" aria-label="Change date">
@@ -164,21 +173,21 @@ class Instruments extends Component {
             </tr>
           </thead>
           <tbody>
-            {changes.slice(currenciesPerPage * (this.state.activePage - 1), currenciesPerPage * this.state.activePage).map((row, i) => 
+            {changes.slice(this.state.perPage * (this.state.activePage - 1), this.state.perPage * this.state.activePage).map((row, i) => 
               <InstrumentsRow
                 row={row}
                 key={row.currency}
               />
             )}
           </tbody>
-          {(changes.length > currenciesPerPage) && (
+          {(changes.length > this.state.perPage) && (
             <tfoot>
               <tr>
-                <td colspan="3">
+                <td colSpan="3">
                   <nav className="currencies-pages">
                     <Pagination
                       activePage={this.state.activePage}
-                      itemsCountPerPage={currenciesPerPage}
+                      itemsCountPerPage={this.state.perPage}
                       totalItemsCount={changes.length}
                       pageRangeDisplayed={5}
                       onChange={(pageNumber) => this.handlePageChange(pageNumber)}

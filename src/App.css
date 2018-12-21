@@ -91,11 +91,16 @@ table td:nth-child(3) {
 .search {  
   text-align: center;
   margin: 0 auto;
-  max-width: 200px;
+  max-width: 350px;
 }
 
 .search .currencyName {
   text-transform: uppercase;
+  max-width: 200px;
+}
+
+.search .selectPagination {
+  max-width: 150px;
 }
 
 .currencies-pages {

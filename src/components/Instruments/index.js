@@ -3,6 +3,55 @@ import * as api from '../../api';
 import InstrumentsRow from './row';
 import Pagination from "react-js-pagination";
 
+const Header = (props) => {
+  return <header className="header">
+    <span className="headerTitle">Currencies on</span>
+    <select value={props.currentDate} className="currentDate custom-select" onChange={props.handleCurrentDateChange}>
+      {Object.keys(props.days).slice(1).map((row, i) => 
+        <option key={row}>{row}</option>
+      )}
+      </select>
+  </header>
+}
+
+const Search = (props) => {
+  return <div className="search">
+    <form className="form-inline">
+      <label className="sr-only" htmlFor="currencyName">Find currency</label>
+      <input type="text" className="form-control mb-2 mr-sm-2 currencyName" id="currencyName" placeholder="E.g. GBP,EUR,PLN" onChange={props.handleCurrencyNameChange} />
+      <select defaultValue={props.perPage} className="selectPagination mb-2 mr-sm-2 custom-select" onChange={props.handlePerPageChange}>
+        <option value="10">10 per page</option>
+        <option value="15">15 per page</option>
+        <option value="20">20 per page</option>
+        <option value="40">40 per page</option>
+        <option value="80">80 per page</option>
+      </select> 
+      <span className="currencyCounter">
+        of {props.changesLength}
+      </span>
+    </form>
+  </div>
+}
+
+const Nav = (props) => {
+  return <nav className="dayNav" role="group" aria-label="Change date">
+    {props.currentDate !== Object.keys(props.days)[1] && (
+      <button type="button" className="btn btn-primary" onClick={props.handlePrevDayClick}>&larr; Previous day</button>
+    )}
+    {props.currentDate !== Object.keys(props.days)[Object.keys(props.days).length - 1] && (
+      <button type="button" className="btn btn-primary" onClick={props.handleNextDayClick}>Next day &rarr;</button>
+    )}
+  </nav>;
+}
+
+const TableHeader = (props) => {
+  return <tr>
+    <th className={props.getHeaderClassName('currency')} onClick={(e) => props.handleHeaderClick(e, 'currency')}>Currency</th>
+    <th className={props.getHeaderClassName('rate')} onClick={(e) => props.handleHeaderClick(e, 'rate')}>Price</th>
+    <th className={props.getHeaderClassName('change')} onClick={(e) => props.handleHeaderClick(e, 'change')}>Change</th>
+  </tr>;
+}
+
 class Instruments extends Component {
 
   constructor(props) {
@@ -59,8 +108,7 @@ class Instruments extends Component {
         break;
     }
 
-    return result;
-      
+    return result;      
   }
 
   getChanges = ()  => {
@@ -154,45 +202,15 @@ class Instruments extends Component {
 
     return (
       <div>
-        <header className="header">
-          <span className="headerTitle">Currencies on</span>
-          <select value={this.state.currentDate} className="currentDate custom-select" onChange={this.handleCurrentDateChange}>
-            {Object.keys(this.state.days).slice(1).map((row, i) => 
-              <option key={row}>{row}</option>
-            )}
-            </select>
-        </header>
-        <div className="search">
-          <form className="form-inline">
-            <label className="sr-only" htmlFor="currencyName">Find currency</label>
-            <input type="text" className="form-control mb-2 mr-sm-2 currencyName" id="currencyName" placeholder="E.g. GBP,PLN" onChange={this.handleCurrencyNameChange} />
-            <select defaultValue={this.state.perPage} className="selectPagination mb-2 mr-sm-2 custom-select" onChange={this.handlePerPageChange}>
-              <option value="10">10 per page</option>
-              <option value="15">15 per page</option>
-              <option value="20">20 per page</option>
-              <option value="40">40 per page</option>
-              <option value="80">80 per page</option>
-            </select> 
-            <span className="currencyCounter">
-              of {changes.length}
-            </span>
-          </form>
-        </div>
-        <nav className="dayNav" role="group" aria-label="Change date">
-          {this.state.currentDate !== Object.keys(this.state.days)[1] && (
-            <button type="button" className="btn btn-primary" onClick={this.handlePrevDayClick}>&larr; Previous day</button>
-          )}
-          {this.state.currentDate !== Object.keys(this.state.days)[Object.keys(this.state.days).length - 1] && (
-            <button type="button" className="btn btn-primary" onClick={this.handleNextDayClick}>Next day &rarr;</button>
-          )}
-        </nav>
+        <Header currentDate={this.state.currentDate} handleCurrentDateChange={this.handleCurrentDateChange} days={this.state.days} />
+
+        <Search handleCurrencyNameChange={this.handleCurrencyNameChange} perPage={this.perPage} handlePerPageChange={this.handlePerPageChange} changesLength={changes.length} />
+
+        <Nav currentDate={this.state.currentDate} days={this.state.days} handlePrevDayClick={this.handlePrevDayClick} handleNextDayClick={this.handleNextDayClick} />
+
         <table>
           <thead>
-            <tr>
-              <th className={this.getHeaderClassName('currency')} onClick={(e) => this.handleHeaderClick(e, 'currency')}>Currency</th>
-              <th className={this.getHeaderClassName('rate')} onClick={(e) => this.handleHeaderClick(e, 'rate')}>Price</th>
-              <th className={this.getHeaderClassName('change')} onClick={(e) => this.handleHeaderClick(e, 'change')}>Change</th>
-            </tr>
+            <TableHeader getHeaderClassName={this.getHeaderClassName} handleHeaderClick={this.handleHeaderClick} />    
           </thead>
           <tbody>
             {changes.slice(this.state.perPage * (this.state.activePage - 1), this.state.perPage * this.state.activePage).map((row, i) => 
@@ -211,8 +229,8 @@ class Instruments extends Component {
                       activePage={this.state.activePage}
                       itemsCountPerPage={this.state.perPage}
                       totalItemsCount={changes.length}
-                      pageRangeDisplayed={5}
                       onChange={(pageNumber) => this.handlePageChange(pageNumber)}
+                      pageRangeDisplayed={5}
                       hideDisabled={true}
                       nextPageText="&raquo;"
                       prevPageText="&laquo;"
@@ -227,6 +245,7 @@ class Instruments extends Component {
             </tfoot>
           )}
         </table>
+
       </div>
     )
   }

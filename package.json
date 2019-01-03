@@ -8,12 +8,13 @@
     "react-dom": "^16.7.0",
     "react-js-pagination": "^3.0.2",
     "react-scripts": "2.1.1",
+    "react-test-renderer": "^16.7.0",
     "reactstrap": "^6.5.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "proxy": "http://trader.enside.pl/",
@@ -25,5 +26,10 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "jest-dom": "^3.0.0",
+    "react-addons-test-utils": "^15.6.2",
+    "react-testing-library": "^5.4.2"
+  }
 }

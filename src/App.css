@@ -14,6 +14,10 @@ table th {
   padding-bottom: 10px;
 }
 
+table tr {
+  margin: 0 3px;
+}
+
 table td.symbol {
   display: flex;
   align-items: center;

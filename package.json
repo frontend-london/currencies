@@ -7,14 +7,14 @@
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-js-pagination": "^3.0.2",
-    "react-scripts": "2.1.1",
+    "react-scripts": "^2.1.2",
     "react-test-renderer": "^16.7.0",
     "reactstrap": "^6.5.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "set CI=true && react-scripts test --env=jsdom --watch",
     "eject": "react-scripts eject"
   },
   "proxy": "http://trader.enside.pl/",

@@ -4,66 +4,74 @@ import InstrumentsRow from './row';
 import Pagination from "react-js-pagination";
 
 const Header = (props) => {
-  return <header className="header">
-    <span className="headerTitle">Currencies on</span>
-    <select value={props.currentDate} className="currentDate custom-select" onChange={props.handleCurrentDateChange}>
-      {Object.keys(props.days).slice(1).map((row, i) => 
-        <option key={row}>{row}</option>
-      )}
+  return (
+    <header className="header">
+      <span className="headerTitle">Currencies on</span>
+      <select value={props.currentDate} className="currentDate custom-select" onChange={props.handleCurrentDateChange}>
+        {Object.keys(props.days).slice(1).map((row, i) =>
+          <option key={row}>{row}</option>
+        )}
       </select>
-  </header>
+    </header>
+  )
 }
 
 const Search = (props) => {
-  return <div className="search">
-    <form className="form-inline">
-      <label className="sr-only" htmlFor="currencyName">Find currency</label>
-      <input type="text" className="form-control mb-2 mr-sm-2 currencyName" id="currencyName" placeholder="E.g. GBP,EUR,PLN" onChange={props.handleCurrencyNameChange} />
-      <select defaultValue={props.perPage} className="selectPagination mb-2 mr-sm-2 custom-select" onChange={props.handlePerPageChange}>
-        <option value="10">10 per page</option>
-        <option value="15">15 per page</option>
-        <option value="20">20 per page</option>
-        <option value="40">40 per page</option>
-        <option value="80">80 per page</option>
-      </select> 
-      <span className="currencyCounter">
-        of {props.changesLength}
-      </span>
-    </form>
-  </div>
+  return (
+    <div className="search">
+      <form className="form-inline">
+        <label className="sr-only" htmlFor="currencyName">Find currency</label>
+        <input type="text" className="form-control mb-2 mr-sm-2 currencyName" id="currencyName" placeholder="E.g. GBP,EUR,PLN" onChange={props.handleCurrencyNameChange} />
+        <select defaultValue={props.perPage} className="selectPagination mb-2 mr-sm-2 custom-select" onChange={props.handlePerPageChange}>
+          <option value="10">10 per page</option>
+          <option value="15">15 per page</option>
+          <option value="20">20 per page</option>
+          <option value="40">40 per page</option>
+          <option value="80">80 per page</option>
+        </select>
+        <span className="currencyCounter">
+          of {props.changesLength}
+        </span>
+      </form>
+    </div>
+  )
 }
 
 const Nav = (props) => {
-  return <nav className="dayNav" role="group" aria-label="Change date">
-    {props.currentDate !== Object.keys(props.days)[1] && (
-      <button type="button" className="btn btn-primary" onClick={props.handlePrevDayClick}>&larr; Previous day</button>
-    )}
-    {props.currentDate !== Object.keys(props.days)[Object.keys(props.days).length - 1] && (
-      <button type="button" className="btn btn-primary" onClick={props.handleNextDayClick}>Next day &rarr;</button>
-    )}
-  </nav>;
+  return (
+    <nav className="dayNav" role="group" aria-label="Change date">
+      {props.currentDate !== Object.keys(props.days)[1] && (
+        <button type="button" className="btn btn-primary" onClick={props.handlePrevDayClick}>&larr; Previous day</button>
+      )}
+      {props.currentDate !== Object.keys(props.days)[Object.keys(props.days).length - 1] && (
+        <button type="button" className="btn btn-primary" onClick={props.handleNextDayClick}>Next day &rarr;</button>
+      )}
+    </nav>
+  )
 }
 
 const TableHeader = (props) => {
-  return <tr>
-    <th className={props.getHeaderClassName('currency')} onClick={(e) => props.handleHeaderClick(e, 'currency')}>Currency</th>
-    <th className={props.getHeaderClassName('rate')} onClick={(e) => props.handleHeaderClick(e, 'rate')}>Price</th>
-    <th className={props.getHeaderClassName('change')} onClick={(e) => props.handleHeaderClick(e, 'change')}>Change</th>
-  </tr>;
+  return (
+    <tr>
+      <th className={props.getHeaderClassName('currency')} onClick={(e) => props.handleHeaderClick(e, 'currency')}>Currency</th>
+      <th className={props.getHeaderClassName('rate')} onClick={(e) => props.handleHeaderClick(e, 'rate')}>Price</th>
+      <th className={props.getHeaderClassName('change')} onClick={(e) => props.handleHeaderClick(e, 'change')}>Change</th>
+    </tr>
+  )
 }
 
 class Instruments extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { 
-      days: [], 
+    this.state = {
+      days: [],
       activePage: 1,
-      sortBy: 'currency', 
-      currentDate: '', 
+      sortBy: 'currency',
+      currentDate: '',
       minDate: null,
       maxDate: null,
-      sortUp: false, 
+      sortUp: false,
       search: null,
       perPage: 15
     };
@@ -71,23 +79,23 @@ class Instruments extends Component {
   }
 
   formatDate(date) {
-    return date.toISOString().slice(0,10);
+    return date.toISOString().slice(0, 10);
   }
 
-  getPrevDay(date) {    
+  getPrevDay(date) {
     if (!date) {
       return false;
     }
-    let prev  = new Date(date);
+    let prev = new Date(date);
     prev.setDate(prev.getDate() - 1);
     return this.formatDate(prev);
   }
-  
+
   getNextDay(date) {
     if (!date) {
       return false;
     }
-    let next  = new Date(date);
+    let next = new Date(date);
     next.setDate(next.getDate() + 1);
     return this.formatDate(next);
   }
@@ -108,10 +116,10 @@ class Instruments extends Component {
         break;
     }
 
-    return result;      
+    return result;
   }
 
-  getChanges = ()  => {
+  getChanges = () => {
     let prevDate = this.getPrevDay(this.state.currentDate),
       prevDay = this.state.days[prevDate],
       search = this.state.search,
@@ -119,30 +127,30 @@ class Instruments extends Component {
       changes = [];
 
     if (prevDay) {
-      Object.keys(prevDay.rates).forEach((currency,index) => {
+      Object.keys(prevDay.rates).forEach((currency, index) => {
         let rate = currDay.rates[currency],
           change = rate - prevDay.rates[currency],
           perChange = (change / prevDay.rates[currency]) * 100,
           classNameId = Math.min(Math.round(Math.abs(perChange)), 8),
           className = 'price ' + ((change > 0) ? 'price-up--' + classNameId : (change < 0) ? 'price-down--' + classNameId : '');
-          
-          if (!search || search.split(',').find((el) => {
-            return currency.includes(el);
-          })) {
-            changes.push({className, currency, rate, change, perChange});  
-          }
+
+        if (!search || search.split(',').find((el) => {
+          return currency.includes(el);
+        })) {
+          changes.push({ className, currency, rate, change, perChange });
+        }
       });
 
       changes.sort(this.compareChanges);
       if (this.state.sortUp) {
-        changes.reverse();   
+        changes.reverse();
       }
     }
     return changes;
   }
 
   async fetchUpdates() {
-    let days = await api.get('currencies.json', this.handleFetchUpdatesError);  
+    let days = await api.get('currencies.json', this.handleFetchUpdatesError);
     this.setState({ days: days, currentDate: Object.keys(days)[1] });
   }
 
@@ -152,20 +160,20 @@ class Instruments extends Component {
 
   handlePrevDayClick = (e) => {
     e.preventDefault();
-    this.setState({currentDate: this.getPrevDay(this.state.currentDate)});
+    this.setState({ currentDate: this.getPrevDay(this.state.currentDate) });
   }
 
   handleNextDayClick = (e) => {
     e.preventDefault();
-    this.setState({currentDate: this.getNextDay(this.state.currentDate)});
+    this.setState({ currentDate: this.getNextDay(this.state.currentDate) });
   }
 
   handleHeaderClick = (e, header) => {
     e.preventDefault();
     if (header === this.state.sortBy) {
-      this.setState({sortUp: !this.state.sortUp});
+      this.setState({ sortUp: !this.state.sortUp });
     } else {
-      this.setState({sortBy: header});
+      this.setState({ sortBy: header });
     }
   }
 
@@ -175,26 +183,26 @@ class Instruments extends Component {
       className = 'active';
 
       if (this.state.sortUp) {
-        className+= ' up';
+        className += ' up';
       }
-    } 
+    }
     return className;
   }
 
   handleCurrencyNameChange = (e) => {
-    this.setState({activePage: 1, search: e.currentTarget.value.toUpperCase()})
+    this.setState({ activePage: 1, search: e.currentTarget.value.toUpperCase() })
   }
 
   handlePageChange = (page) => {
-    this.setState({activePage: page})
+    this.setState({ activePage: page })
   }
 
   handlePerPageChange = (e) => {
-    this.setState({perPage: parseInt(e.currentTarget.value)});
+    this.setState({ perPage: parseInt(e.currentTarget.value) });
   }
 
   handleCurrentDateChange = (e) => {
-    this.setState({currentDate: e.currentTarget.value});
+    this.setState({ currentDate: e.currentTarget.value });
   }
 
   render() {
@@ -210,10 +218,10 @@ class Instruments extends Component {
 
         <table>
           <thead>
-            <TableHeader getHeaderClassName={this.getHeaderClassName} handleHeaderClick={this.handleHeaderClick} />    
+            <TableHeader getHeaderClassName={this.getHeaderClassName} handleHeaderClick={this.handleHeaderClick} />
           </thead>
           <tbody>
-            {changes.slice(this.state.perPage * (this.state.activePage - 1), this.state.perPage * this.state.activePage).map((row, i) => 
+            {changes.slice(this.state.perPage * (this.state.activePage - 1), this.state.perPage * this.state.activePage).map((row, i) =>
               <InstrumentsRow
                 row={row}
                 key={row.currency}

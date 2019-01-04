@@ -1,13 +1,10 @@
 import React from 'react';
-import { shallow } from 'enzyme';
 import App from './App';
+import { render, fireEvent, cleanup } from 'react-testing-library'
 import Instruments from './components/Instruments';
 
-it('renders without crashing', () => {
-  shallow(<App />);
-});
+afterEach(cleanup)
 
-it('includes Instruments', () => {
-  const app = shallow(<App />);
-  expect(app.containsMatchingElement(<Instruments />)).toEqual(true)
+test('Instruments component rendered', () => {
+  const { getByText } = render(<Instruments />)
 });

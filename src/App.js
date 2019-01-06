@@ -6,7 +6,7 @@ class App extends Component {
   render() {
     return (
       <div className="container">
-        <Instruments />
+        <Instruments api="currencies.test.json" perPage="15" />
       </div>
     );
   }

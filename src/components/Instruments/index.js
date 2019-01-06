@@ -6,8 +6,8 @@ import Pagination from "react-js-pagination";
 const Header = (props) => {
   return (
     <header className="header">
-      <span className="headerTitle">Currencies on</span>
-      <select value={props.currentDate} className="currentDate custom-select" onChange={props.handleCurrentDateChange}>
+      <label htmlFor="currenciesDate" className="headerTitle">Currencies on</label>
+      <select id="currenciesDate" value={props.currentDate} className="currentDate custom-select" onChange={props.handleCurrentDateChange}>
         {Object.keys(props.days).slice(1).map((row, i) =>
           <option key={row}>{row}</option>
         )}
@@ -40,10 +40,10 @@ const Search = (props) => {
 const Nav = (props) => {
   return (
     <nav className="dayNav" role="group" aria-label="Change date">
-      {props.currentDate !== Object.keys(props.days)[1] && (
+      {props.currentDate && props.currentDate !== Object.keys(props.days)[1] && (
         <button type="button" className="btn btn-primary" onClick={props.handlePrevDayClick}>&larr; Previous day</button>
       )}
-      {props.currentDate !== Object.keys(props.days)[Object.keys(props.days).length - 1] && (
+      {props.currentDate && props.currentDate !== Object.keys(props.days)[Object.keys(props.days).length - 1] && (
         <button type="button" className="btn btn-primary" onClick={props.handleNextDayClick}>Next day &rarr;</button>
       )}
     </nav>
@@ -73,7 +73,7 @@ class Instruments extends Component {
       maxDate: null,
       sortUp: false,
       search: null,
-      perPage: 15
+      perPage: props.perPage
     };
     this.fetchUpdates();
   }
@@ -150,11 +150,16 @@ class Instruments extends Component {
   }
 
   async fetchUpdates() {
-    let days = await api.get('currencies.json', this.handleFetchUpdatesError);
+    // let days = await api.get(this.props.api, this.handleFetchUpdatesError);
+    // API_PATH
+    let days = await api.get(this.props.api, this.handleFetchUpdatesError);
+    // console.info('setDate', Object.keys(days)[1]);
+    // console.info('setDays', days);
     this.setState({ days: days, currentDate: Object.keys(days)[1] });
   }
 
   handleFetchUpdatesError = (err) => {
+    console.info('path', this.props.api);
     console.info('Error', err);
   }
 
@@ -212,7 +217,7 @@ class Instruments extends Component {
       <div>
         <Header currentDate={this.state.currentDate} handleCurrentDateChange={this.handleCurrentDateChange} days={this.state.days} />
 
-        <Search handleCurrencyNameChange={this.handleCurrencyNameChange} perPage={this.perPage} handlePerPageChange={this.handlePerPageChange} changesLength={changes.length} />
+        <Search handleCurrencyNameChange={this.handleCurrencyNameChange} perPage={this.props.perPage} handlePerPageChange={this.handlePerPageChange} changesLength={changes.length} />
 
         <Nav currentDate={this.state.currentDate} days={this.state.days} handlePrevDayClick={this.handlePrevDayClick} handleNextDayClick={this.handleNextDayClick} />
 

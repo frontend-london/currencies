@@ -6,5 +6,5 @@ import Instruments from './components/Instruments';
 afterEach(cleanup)
 
 test('Instruments component rendered', () => {
-  const { getByText } = render(<Instruments />)
+  const { getByText } = render(<Instruments api="currencies.test.json" perPage={15} />)
 });

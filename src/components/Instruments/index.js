@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import * as api from '../../api';
-import InstrumentsRow from './row';
+import Row from './row';
 import Header from './header';
 import Search from './search';
 import Nav from './nav';
@@ -20,7 +20,8 @@ class Instruments extends Component {
       maxDate: null,
       sortUp: false,
       search: null,
-      perPage: props.perPage
+      perPage: props.perPage,
+      error: false
     };
     this.fetchUpdates();
   }
@@ -102,8 +103,8 @@ class Instruments extends Component {
   }
 
   handleFetchUpdatesError = (err) => {
-    console.info('path', this.props.api);
-    console.info('Error', err);
+    console.info('Error', this.props.api, err);
+    this.setState({ error: true })
   }
 
   handlePrevDayClick = (e) => {
@@ -123,18 +124,6 @@ class Instruments extends Component {
     } else {
       this.setState({ sortBy: header });
     }
-  }
-
-  getHeaderClassName = (header) => {
-    let className = '';
-    if (this.state.sortBy === header) {
-      className = 'active';
-
-      if (this.state.sortUp) {
-        className += ' up';
-      }
-    }
-    return className;
   }
 
   handleCurrencyNameChange = (e) => {
@@ -170,11 +159,11 @@ class Instruments extends Component {
 
         <table>
           <thead>
-            <TableHeader getHeaderClassName={this.getHeaderClassName} handleHeaderClick={this.handleHeaderClick} />
+            <TableHeader sortBy={this.state.sortBy} sortUp={this.state.sortUp} handleHeaderClick={this.handleHeaderClick} />
           </thead>
           <tbody>
             {changes.slice(this.state.perPage * (this.state.activePage - 1), this.state.perPage * this.state.activePage).map((row, i) =>
-              <InstrumentsRow
+              <Row
                 row={row}
                 key={row.currency}
               />
@@ -190,6 +179,9 @@ class Instruments extends Component {
             />
           </tfoot>
         </table>
+        {this.state.error && (
+          <div className="error">Fetch Currencies Error - try again later</div>
+        )}
       </div>
     )
   }

@@ -1,10 +1,8 @@
 import React from 'react';
 import App from './App';
-import { render, fireEvent, cleanup } from 'react-testing-library'
-import Instruments from './components/Instruments';
-
+import { render, cleanup } from 'react-testing-library'
 afterEach(cleanup)
 
-test('Instruments component rendered', () => {
-  const { getByText } = render(<Instruments api="currencies.test.json" perPage={15} />)
+test('App rendered', () => {
+  render(<App />)
 });

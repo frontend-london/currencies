@@ -1,64 +1,11 @@
 import React, { Component } from 'react';
 import * as api from '../../api';
 import InstrumentsRow from './row';
-import Pagination from "react-js-pagination";
-
-const Header = (props) => {
-  return (
-    <header className="header">
-      <label htmlFor="currenciesDate" className="headerTitle">Currencies on</label>
-      <select id="currenciesDate" value={props.currentDate} className="currentDate custom-select" onChange={props.handleCurrentDateChange}>
-        {Object.keys(props.days).slice(1).map((row, i) =>
-          <option key={row}>{row}</option>
-        )}
-      </select>
-    </header>
-  )
-}
-
-const Search = (props) => {
-  return (
-    <div className="search">
-      <form className="form-inline">
-        <label className="sr-only" htmlFor="currencyName">Find currency</label>
-        <input type="text" className="form-control mb-2 mr-sm-2 currencyName" id="currencyName" placeholder="E.g. GBP,EUR,PLN" onChange={props.handleCurrencyNameChange} />
-        <select defaultValue={props.perPage} className="selectPagination mb-2 mr-sm-2 custom-select" onChange={props.handlePerPageChange}>
-          <option value="10">10 per page</option>
-          <option value="15">15 per page</option>
-          <option value="20">20 per page</option>
-          <option value="40">40 per page</option>
-          <option value="80">80 per page</option>
-        </select>
-        <span className="currencyCounter">
-          of {props.changesLength}
-        </span>
-      </form>
-    </div>
-  )
-}
-
-const Nav = (props) => {
-  return (
-    <nav className="dayNav" role="group" aria-label="Change date">
-      {props.currentDate && props.currentDate !== Object.keys(props.days)[1] && (
-        <button type="button" className="btn btn-primary" onClick={props.handlePrevDayClick}>&larr; Previous day</button>
-      )}
-      {props.currentDate && props.currentDate !== Object.keys(props.days)[Object.keys(props.days).length - 1] && (
-        <button type="button" className="btn btn-primary" onClick={props.handleNextDayClick}>Next day &rarr;</button>
-      )}
-    </nav>
-  )
-}
-
-const TableHeader = (props) => {
-  return (
-    <tr>
-      <th className={props.getHeaderClassName('currency')} onClick={(e) => props.handleHeaderClick(e, 'currency')}>Currency</th>
-      <th className={props.getHeaderClassName('rate')} onClick={(e) => props.handleHeaderClick(e, 'rate')}>Price</th>
-      <th className={props.getHeaderClassName('change')} onClick={(e) => props.handleHeaderClick(e, 'change')}>Change</th>
-    </tr>
-  )
-}
+import Header from './header';
+import Search from './search';
+import Nav from './nav';
+import TableHeader from './tableHeader';
+import Pagination from './pagination';
 
 class Instruments extends Component {
 
@@ -150,11 +97,7 @@ class Instruments extends Component {
   }
 
   async fetchUpdates() {
-    // let days = await api.get(this.props.api, this.handleFetchUpdatesError);
-    // API_PATH
     let days = await api.get(this.props.api, this.handleFetchUpdatesError);
-    // console.info('setDate', Object.keys(days)[1]);
-    // console.info('setDays', days);
     this.setState({ days: days, currentDate: Object.keys(days)[1] });
   }
 
@@ -202,8 +145,12 @@ class Instruments extends Component {
     this.setState({ activePage: page })
   }
 
-  handlePerPageChange = (e) => {
-    this.setState({ perPage: parseInt(e.currentTarget.value) });
+  handlePerPageChange = (e, changesLength) => {
+    const perPage = parseInt(e.currentTarget.value);
+    this.setState({ perPage });
+    if ((this.state.activePage - 1) * perPage >= changesLength) {
+      this.setState({ activePage: Math.ceil(changesLength / perPage) });
+    }
   }
 
   handleCurrentDateChange = (e) => {
@@ -217,9 +164,9 @@ class Instruments extends Component {
       <div>
         <Header currentDate={this.state.currentDate} handleCurrentDateChange={this.handleCurrentDateChange} days={this.state.days} />
 
-        <Search handleCurrencyNameChange={this.handleCurrencyNameChange} perPage={this.props.perPage} handlePerPageChange={this.handlePerPageChange} changesLength={changes.length} />
-
         <Nav currentDate={this.state.currentDate} days={this.state.days} handlePrevDayClick={this.handlePrevDayClick} handleNextDayClick={this.handleNextDayClick} />
+
+        <Search handleCurrencyNameChange={this.handleCurrencyNameChange} />
 
         <table>
           <thead>
@@ -233,32 +180,16 @@ class Instruments extends Component {
               />
             )}
           </tbody>
-          {(changes.length > this.state.perPage) && (
-            <tfoot>
-              <tr>
-                <td colSpan="3">
-                  <nav className="currencies-pages">
-                    <Pagination
-                      activePage={this.state.activePage}
-                      itemsCountPerPage={this.state.perPage}
-                      totalItemsCount={changes.length}
-                      onChange={(pageNumber) => this.handlePageChange(pageNumber)}
-                      pageRangeDisplayed={5}
-                      hideDisabled={true}
-                      nextPageText="&raquo;"
-                      prevPageText="&laquo;"
-                      hideFirstLastPages={true}
-                      itemClass="page-item"
-                      linkClass="page-link"
-                      innerClass="pagination justify-content-center"
-                    />
-                  </nav>
-                </td>
-              </tr>
-            </tfoot>
-          )}
+          <tfoot>
+            <Pagination
+              activePage={this.state.activePage}
+              perPage={this.state.perPage}
+              changesLength={changes.length}
+              handlePageChange={this.handlePageChange}
+              handlePerPageChange={this.handlePerPageChange}
+            />
+          </tfoot>
         </table>
-
       </div>
     )
   }

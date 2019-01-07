@@ -30,7 +30,7 @@ test('Component rendered with correct date and number of rows', async () => {
   expect(getAllByTestId('row').length).toEqual(PER_PAGE);
 })
 
-test('Component search returning limited number of currencies', async () => {
+test('Searching returns limited number of currencies', async () => {
   const { getByLabelText, getAllByTestId, getBySelectText } = renderComponent()
   await wait(() => getBySelectText('2017-01-02'));
   const searchField = getByLabelText('Find currency')
@@ -40,4 +40,14 @@ test('Component search returning limited number of currencies', async () => {
   expect(getAllByTestId('row').length).toEqual(2);
   fireEvent.change(searchField, { target: { value: 'GBP,EUR,A' } })
   expect(getAllByTestId('row').length).toEqual(14);
+})
+
+test('Sorting returns sorted rows', async () => {
+  const { getByText, getBySelectText } = renderComponent()
+  await wait(() => getBySelectText('2017-01-02'));
+  fireEvent.click(getByText('Price'))
+  await wait(() => getByText('BTC'));
+
+  fireEvent.click(getByText('Price'))
+  await wait(() => getByText('BYR'));
 })

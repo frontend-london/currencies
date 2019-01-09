@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Pagination from "react-js-pagination";
 
+const PAGINATION_OPTIONS = [10, 15, 20, 40, 80];
+
 class InstrumentsPagination extends Component {
   render() {
     const { changesLength, perPage, activePage, handlePageChange, handlePerPageChange } = this.props;
@@ -26,11 +28,9 @@ class InstrumentsPagination extends Component {
 
           <form className="form-inline pagination-perpage">
             <select defaultValue={perPage} className="selectPagination mb-2 mr-sm-2 custom-select" onChange={(e) => handlePerPageChange(e, changesLength)}>
-              <option value="10">10 per page</option>
-              <option value="15">15 per page</option>
-              <option value="20">20 per page</option>
-              <option value="40">40 per page</option>
-              <option value="80">80 per page</option>
+              {PAGINATION_OPTIONS.map(option =>
+                <option value={option} key={option}>{option} per page</option>
+              )}
             </select>
             <span className="currencyCounter">
               of {changesLength}

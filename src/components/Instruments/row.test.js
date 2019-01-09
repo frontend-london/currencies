@@ -3,7 +3,7 @@ import { render, cleanup } from 'react-testing-library'
 import Row from './row';
 
 beforeEach(function () {
-  global.handleHeaderClick = jest.fn(async () => { });
+  global.handleHeaderClick = jest.fn(() => { });
 });
 
 afterEach(cleanup)

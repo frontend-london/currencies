@@ -3,7 +3,7 @@ import { render, fireEvent, cleanup } from 'react-testing-library'
 import Search from './search';
 
 beforeEach(function () {
-  global.handleCurrencyNameChange = jest.fn(async () => { });
+  global.handleCurrencyNameChange = jest.fn(() => { });
 });
 
 afterEach(cleanup)

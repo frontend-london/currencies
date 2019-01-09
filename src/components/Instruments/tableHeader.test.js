@@ -3,7 +3,7 @@ import { render, fireEvent, cleanup } from 'react-testing-library'
 import TableHeader from './tableHeader';
 
 beforeEach(function () {
-  global.handleHeaderClick = jest.fn(async () => { });
+  global.handleHeaderClick = jest.fn(() => { });
 });
 
 afterEach(cleanup)

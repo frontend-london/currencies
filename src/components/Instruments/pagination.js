@@ -3,15 +3,16 @@ import Pagination from "react-js-pagination";
 
 class InstrumentsPagination extends Component {
   render() {
+    const { changesLength, perPage, activePage, handlePageChange, handlePerPageChange } = this.props;
     return (
       <tr>
         <td colSpan="3" className="currencies-pages">
-          {(this.props.changesLength > this.props.perPage) && (
+          {(changesLength > perPage) && (
             <Pagination
-              activePage={this.props.activePage}
-              itemsCountPerPage={this.props.perPage}
-              totalItemsCount={this.props.changesLength}
-              onChange={(pageNumber) => this.props.handlePageChange(pageNumber)}
+              activePage={activePage}
+              itemsCountPerPage={perPage}
+              totalItemsCount={changesLength}
+              onChange={(pageNumber) => handlePageChange(pageNumber)}
               pageRangeDisplayed={5}
               hideDisabled={true}
               nextPageText="&raquo;"
@@ -24,7 +25,7 @@ class InstrumentsPagination extends Component {
           )}
 
           <form className="form-inline pagination-perpage">
-            <select defaultValue={this.props.perPage} className="selectPagination mb-2 mr-sm-2 custom-select" onChange={(e) => this.props.handlePerPageChange(e, this.props.changesLength)}>
+            <select defaultValue={perPage} className="selectPagination mb-2 mr-sm-2 custom-select" onChange={(e) => handlePerPageChange(e, changesLength)}>
               <option value="10">10 per page</option>
               <option value="15">15 per page</option>
               <option value="20">20 per page</option>
@@ -32,7 +33,7 @@ class InstrumentsPagination extends Component {
               <option value="80">80 per page</option>
             </select>
             <span className="currencyCounter">
-              of {this.props.changesLength}
+              of {changesLength}
             </span>
           </form>
         </td>

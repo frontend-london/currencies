@@ -148,21 +148,22 @@ class Instruments extends Component {
 
   render() {
     const changes = this.getChanges();
+    const { currentDate, days, sortBy, sortUp, perPage, activePage, error } = this.state;
 
     return (
       <div>
-        <Header currentDate={this.state.currentDate} handleCurrentDateChange={this.handleCurrentDateChange} days={this.state.days} />
+        <Header currentDate={currentDate} handleCurrentDateChange={this.handleCurrentDateChange} days={days} />
 
-        <Nav currentDate={this.state.currentDate} days={this.state.days} handlePrevDayClick={this.handlePrevDayClick} handleNextDayClick={this.handleNextDayClick} />
+        <Nav currentDate={currentDate} days={days} handlePrevDayClick={this.handlePrevDayClick} handleNextDayClick={this.handleNextDayClick} />
 
         <Search handleCurrencyNameChange={this.handleCurrencyNameChange} />
 
         <table>
           <thead>
-            <TableHeader sortBy={this.state.sortBy} sortUp={this.state.sortUp} handleHeaderClick={this.handleHeaderClick} />
+            <TableHeader sortBy={sortBy} sortUp={sortUp} handleHeaderClick={this.handleHeaderClick} />
           </thead>
           <tbody>
-            {changes.slice(this.state.perPage * (this.state.activePage - 1), this.state.perPage * this.state.activePage).map((row, i) =>
+            {changes.slice(perPage * (activePage - 1), perPage * activePage).map((row, i) =>
               <Row
                 row={row}
                 key={row.currency}
@@ -171,15 +172,15 @@ class Instruments extends Component {
           </tbody>
           <tfoot>
             <Pagination
-              activePage={this.state.activePage}
-              perPage={this.state.perPage}
+              activePage={activePage}
+              perPage={perPage}
               changesLength={changes.length}
               handlePageChange={this.handlePageChange}
               handlePerPageChange={this.handlePerPageChange}
             />
           </tfoot>
         </table>
-        {this.state.error && (
+        {error && (
           <div className="error">Fetch Currencies Error - try again later</div>
         )}
       </div>

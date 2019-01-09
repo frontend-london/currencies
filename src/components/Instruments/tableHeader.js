@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 
 class InstrumentsTableHeader extends Component {
   getHeaderClassName = (header) => {
+    const { sortBy, sortUp } = this.props;
     let className = '';
-    if (this.props.sortBy === header) {
+    if (sortBy === header) {
       className = 'active';
 
-      if (this.props.sortUp) {
+      if (sortUp) {
         className += ' up';
       }
     }
@@ -14,11 +15,12 @@ class InstrumentsTableHeader extends Component {
   }
 
   render() {
+    const { handleHeaderClick } = this.props;
     return (
       <tr>
-        <th className={this.getHeaderClassName('currency')} onClick={(e) => this.props.handleHeaderClick(e, 'currency')}>Currency</th>
-        <th className={this.getHeaderClassName('rate')} onClick={(e) => this.props.handleHeaderClick(e, 'rate')}>Price</th>
-        <th className={this.getHeaderClassName('change')} onClick={(e) => this.props.handleHeaderClick(e, 'change')}>Change</th>
+        <th className={this.getHeaderClassName('currency')} onClick={(e) => handleHeaderClick(e, 'currency')}>Currency</th>
+        <th className={this.getHeaderClassName('rate')} onClick={(e) => handleHeaderClick(e, 'rate')}>Price</th>
+        <th className={this.getHeaderClassName('change')} onClick={(e) => handleHeaderClick(e, 'change')}>Change</th>
       </tr>
     )
   }

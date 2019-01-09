@@ -155,6 +155,14 @@ class Instruments extends Component {
     this.setState({ modalCurrency: null });
   }
 
+  getChartData = (currency) => {
+    let data = [];
+    Object.keys(this.state.days).forEach((day, index) => {
+      data.push({ name: day, rate: this.state.days[day].rates[currency] });
+    });
+    return data;
+  }
+
   render() {
     const changes = this.getChanges();
     const { currentDate, days, sortBy, sortUp, perPage, activePage, error, modalCurrency } = this.state;
@@ -184,7 +192,7 @@ class Instruments extends Component {
         )}
 
         {modalCurrency && (
-          <ModalCurrency currency={modalCurrency} handleCloseModal={this.handleCloseModal} />
+          <ModalCurrency currency={modalCurrency} handleCloseModal={this.handleCloseModal} chartData={this.getChartData(modalCurrency)} />
         )}
       </div>
     )

@@ -1,0 +1,415 @@
+[
+  {
+    "className": "price price-down--2",
+    "currency": "BTC",
+    "rate": 0.000981356677,
+    "change": -0.0000212475880000001,
+    "perChange": -2.119239738123406
+  },
+  {
+    "className": "price price-up--0",
+    "currency": "CLF",
+    "rate": 0.025187,
+    "change": 0.000020000000000002655,
+    "perChange": 0.07946914610403566
+  },
+  {
+    "className": "price price-up--0",
+    "currency": "BHD",
+    "rate": 0.37694,
+    "change": 0.00036999999999998145,
+    "perChange": 0.09825530445866146
+  },
+  {
+    "className": "price price-up--1",
+    "currency": "FKP",
+    "rate": 0.814263,
+    "change": 0.004480999999999957,
+    "perChange": 0.553358805209298
+  },
+  {
+    "className": "price price-up--1",
+    "currency": "GBP",
+    "rate": 0.814263,
+    "change": 0.004480999999999957,
+    "perChange": 0.553358805209298
+  },
+  {
+    "className": "price price-up--1",
+    "currency": "GGP",
+    "rate": 0.814263,
+    "change": 0.004480999999999957,
+    "perChange": 0.553358805209298
+  },
+  {
+    "className": "price price-up--1",
+    "currency": "GIP",
+    "rate": 0.814263,
+    "change": 0.004480999999999957,
+    "perChange": 0.553358805209298
+  },
+  {
+    "className": "price price-up--1",
+    "currency": "EUR",
+    "rate": 0.956246,
+    "change": 0.006533000000000011,
+    "perChange": 0.687892026327955
+  },
+  {
+    "className": "price ",
+    "currency": "BMD",
+    "rate": 1,
+    "change": 0,
+    "perChange": 0
+  },
+  {
+    "className": "price ",
+    "currency": "CUC",
+    "rate": 1,
+    "change": 0,
+    "perChange": 0
+  },
+  {
+    "className": "price price-down--0",
+    "currency": "BSD",
+    "rate": 1.000928,
+    "change": -0.0025100000000000122,
+    "perChange": -0.2501400186159994
+  },
+  {
+    "className": "price price-up--1",
+    "currency": "CHF",
+    "rate": 1.02421,
+    "change": 0.005686999999999998,
+    "perChange": 0.5583575432268095
+  },
+  {
+    "className": "price price-down--0",
+    "currency": "CAD",
+    "rate": 1.344103,
+    "change": -0.0002969999999999917,
+    "perChange": -0.022091639393037172
+  },
+  {
+    "className": "price price-up--0",
+    "currency": "AUD",
+    "rate": 1.389852,
+    "change": 0.0036519999999999886,
+    "perChange": 0.26345404703505904
+  },
+  {
+    "className": "price price-up--0",
+    "currency": "BND",
+    "rate": 1.44741,
+    "change": 0.0026780000000001802,
+    "perChange": 0.18536309848471416
+  },
+  {
+    "className": "price ",
+    "currency": "ANG",
+    "rate": 1.7762,
+    "change": 0,
+    "perChange": 0
+  },
+  {
+    "className": "price ",
+    "currency": "AWG",
+    "rate": 1.793333,
+    "change": 0,
+    "perChange": 0
+  },
+  {
+    "className": "price ",
+    "currency": "AZN",
+    "rate": 1.8017,
+    "change": 0,
+    "perChange": 0
+  },
+  {
+    "className": "price price-up--1",
+    "currency": "BAM",
+    "rate": 1.868164,
+    "change": 0.009743999999999975,
+    "perChange": 0.5243163547529609
+  },
+  {
+    "className": "price price-up--1",
+    "currency": "BGN",
+    "rate": 1.870055,
+    "change": 0.012604999999999977,
+    "perChange": 0.6786185361651714
+  },
+  {
+    "className": "price price-down--0",
+    "currency": "BYN",
+    "rate": 1.960808,
+    "change": -0.0048239999999999394,
+    "perChange": -0.24541725002441653
+  },
+  {
+    "className": "price price-down--0",
+    "currency": "BBD",
+    "rate": 2.006851,
+    "change": -0.00494799999999973,
+    "perChange": -0.24594902373446503
+  },
+  {
+    "className": "price price-down--0",
+    "currency": "BZD",
+    "rate": 2.011931,
+    "change": -0.0048799999999999955,
+    "perChange": -0.24196615349678258
+  },
+  {
+    "className": "price price-up--1",
+    "currency": "FJD",
+    "rate": 2.1336,
+    "change": 0.02829999999999977,
+    "perChange": 1.3442264760366582
+  },
+  {
+    "className": "price price-down--0",
+    "currency": "GEL",
+    "rate": 2.65356,
+    "change": -0.00031999999999987594,
+    "perChange": -0.012057817233630606
+  },
+  {
+    "className": "price price-up--1",
+    "currency": "BRL",
+    "rate": 3.2854,
+    "change": 0.030956000000000206,
+    "perChange": 0.951191662846256
+  },
+  {
+    "className": "price ",
+    "currency": "AED",
+    "rate": 3.672896,
+    "change": 0,
+    "perChange": 0
+  },
+  {
+    "className": "price price-up--1",
+    "currency": "GHS",
+    "rate": 4.307792,
+    "change": 0.03779200000000049,
+    "perChange": 0.8850585480093792
+  },
+  {
+    "className": "price price-up--0",
+    "currency": "BOB",
+    "rate": 6.936512,
+    "change": 0.0030709999999993798,
+    "perChange": 0.04429258141807769
+  },
+  {
+    "className": "price price-up--0",
+    "currency": "CNY",
+    "rate": 6.945,
+    "change": 0.000300000000000189,
+    "perChange": 0.004319841029852823
+  },
+  {
+    "className": "price price-up--1",
+    "currency": "DKK",
+    "rate": 7.10881,
+    "change": 0.044153999999999805,
+    "perChange": 0.6249985845029086
+  },
+  {
+    "className": "price price-down--0",
+    "currency": "GTQ",
+    "rate": 7.529038,
+    "change": -0.018440000000000012,
+    "perChange": -0.24432002319185311
+  },
+  {
+    "className": "price price-down--0",
+    "currency": "BWP",
+    "rate": 10.693976,
+    "change": -0.025873999999999953,
+    "perChange": -0.2413653176117199
+  },
+  {
+    "className": "price price-up--0",
+    "currency": "EEK",
+    "rate": 14.913525,
+    "change": 0.04752500000000026,
+    "perChange": 0.3196892237320077
+  },
+  {
+    "className": "price price-up--0",
+    "currency": "ERN",
+    "rate": 15.145,
+    "change": 0.004999999999999005,
+    "perChange": 0.03302509907529066
+  },
+  {
+    "className": "price price-up--0",
+    "currency": "ARS",
+    "rate": 15.94,
+    "change": 0.07124999999999915,
+    "perChange": 0.44899566758565823
+  },
+  {
+    "className": "price price-down--0",
+    "currency": "EGP",
+    "rate": 18.1,
+    "change": -0.017499999999998295,
+    "perChange": -0.09659169311438276
+  },
+  {
+    "className": "price price-down--0",
+    "currency": "ETB",
+    "rate": 22.431307,
+    "change": -0.043651999999998026,
+    "perChange": -0.1942250484194344
+  },
+  {
+    "className": "price ",
+    "currency": "CUP",
+    "rate": 24.728383,
+    "change": 0,
+    "perChange": 0
+  },
+  {
+    "className": "price price-up--1",
+    "currency": "CZK",
+    "rate": 25.83745,
+    "change": 0.16661700000000224,
+    "perChange": 0.6490517857367629
+  },
+  {
+    "className": "price ",
+    "currency": "GMD",
+    "rate": 42.7,
+    "change": 0,
+    "perChange": 0
+  },
+  {
+    "className": "price price-down--0",
+    "currency": "DOP",
+    "rate": 46.58625,
+    "change": -0.11165400000000147,
+    "perChange": -0.2390985257068529
+  },
+  {
+    "className": "price price-down--0",
+    "currency": "AFN",
+    "rate": 66.844,
+    "change": -0.11450000000000671,
+    "perChange": -0.17100144119119562
+  },
+  {
+    "className": "price price-up--0",
+    "currency": "BTN",
+    "rate": 68.094099,
+    "change": 0.10026600000000485,
+    "perChange": 0.1474633736268477
+  },
+  {
+    "className": "price price-down--0",
+    "currency": "BDT",
+    "rate": 79.122281,
+    "change": -0.19066800000000228,
+    "perChange": -0.24039958468824843
+  },
+  {
+    "className": "price price-down--0",
+    "currency": "CVE",
+    "rate": 103.9625,
+    "change": -0.32099999999999795,
+    "perChange": -0.3078147549708228
+  },
+  {
+    "className": "price price-up--0",
+    "currency": "DZD",
+    "rate": 110.742,
+    "change": 0.34499999999999886,
+    "perChange": 0.31250849207858805
+  },
+  {
+    "className": "price price-up--0",
+    "currency": "ALL",
+    "rate": 128.358385,
+    "change": 0.060000000000002274,
+    "perChange": 0.04676598228419031
+  },
+  {
+    "className": "price ",
+    "currency": "AOA",
+    "rate": 165.9025,
+    "change": 0,
+    "perChange": 0
+  },
+  {
+    "className": "price price-down--0",
+    "currency": "DJF",
+    "rate": 177.722501,
+    "change": -0.025000000000005684,
+    "perChange": -0.01406489534837718
+  },
+  {
+    "className": "price price-down--0",
+    "currency": "GYD",
+    "rate": 207.29455,
+    "change": -0.5664510000000007,
+    "perChange": -0.27251432316541224
+  },
+  {
+    "className": "price price-up--0",
+    "currency": "AMD",
+    "rate": 483.730001,
+    "change": 0.0024999999999977263,
+    "perChange": 0.0005168199026992525
+  },
+  {
+    "className": "price price-down--0",
+    "currency": "CRC",
+    "rate": 551.40904,
+    "change": -1.4040330000000267,
+    "perChange": -0.2539797028280528
+  },
+  {
+    "className": "price price-up--0",
+    "currency": "CLP",
+    "rate": 669.351902,
+    "change": 0.35000000000002274,
+    "perChange": 0.05231674214283815
+  },
+  {
+    "className": "price ",
+    "currency": "CDF",
+    "rate": 1169.950739,
+    "change": 0,
+    "perChange": 0
+  },
+  {
+    "className": "price price-down--1",
+    "currency": "BIF",
+    "rate": 1671.989879,
+    "change": -8.905600999999933,
+    "perChange": -0.529812894731559
+  },
+  {
+    "className": "price price-up--1",
+    "currency": "COP",
+    "rate": 3004.85,
+    "change": 19.110249999999724,
+    "perChange": 0.6400507612895505
+  },
+  {
+    "className": "price price-down--0",
+    "currency": "GNF",
+    "rate": 9433.9,
+    "change": -23.05000000000109,
+    "perChange": -0.24373608827371498
+  },
+  {
+    "className": "price ",
+    "currency": "BYR",
+    "rate": 20026.25,
+    "change": 0,
+    "perChange": 0
+  }
+]

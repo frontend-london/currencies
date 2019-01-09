@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import * as api from '../../api';
-import Row from './row';
 import Header from './header';
 import Search from './search';
 import Nav from './nav';
-import TableHeader from './tableHeader';
-import Pagination from './pagination';
+import Table from './table';
 
 class Instruments extends Component {
 
@@ -15,10 +13,10 @@ class Instruments extends Component {
       days: [],
       activePage: 1,
       sortBy: 'currency',
+      sortUp: false,
       currentDate: '',
       minDate: null,
       maxDate: null,
-      sortUp: false,
       search: null,
       perPage: props.perPage,
       error: false
@@ -158,28 +156,17 @@ class Instruments extends Component {
 
         <Search handleCurrencyNameChange={this.handleCurrencyNameChange} />
 
-        <table>
-          <thead>
-            <TableHeader sortBy={sortBy} sortUp={sortUp} handleHeaderClick={this.handleHeaderClick} />
-          </thead>
-          <tbody>
-            {changes.slice(perPage * (activePage - 1), perPage * activePage).map((row, i) =>
-              <Row
-                row={row}
-                key={row.currency}
-              />
-            )}
-          </tbody>
-          <tfoot>
-            <Pagination
-              activePage={activePage}
-              perPage={perPage}
-              changesLength={changes.length}
-              handlePageChange={this.handlePageChange}
-              handlePerPageChange={this.handlePerPageChange}
-            />
-          </tfoot>
-        </table>
+        <Table
+          sortBy={sortBy}
+          sortUp={sortUp}
+          perPage={perPage}
+          activePage={activePage}
+          changes={changes}
+          handlePageChange={this.handlePageChange}
+          handleHeaderClick={this.handleHeaderClick}
+          handlePerPageChange={this.handlePerPageChange}
+        />
+
         {error && (
           <div className="error">Fetch Currencies Error - try again later</div>
         )}

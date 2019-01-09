@@ -4,6 +4,8 @@ import Header from './header';
 import Search from './search';
 import Nav from './nav';
 import Table from './table';
+import ModalCurrency from '../InstrumentModal';
+
 
 class Instruments extends Component {
 
@@ -18,6 +20,7 @@ class Instruments extends Component {
       minDate: null,
       maxDate: null,
       search: null,
+      modalCurrency: null,
       perPage: props.perPage,
       error: false
     };
@@ -144,9 +147,17 @@ class Instruments extends Component {
     this.setState({ currentDate: e.currentTarget.value });
   }
 
+  handleShowCurrencyDetails = (modalCurrency) => {
+    this.setState({ modalCurrency });
+  }
+
+  handleCloseModal = () => {
+    this.setState({ modalCurrency: null });
+  }
+
   render() {
     const changes = this.getChanges();
-    const { currentDate, days, sortBy, sortUp, perPage, activePage, error } = this.state;
+    const { currentDate, days, sortBy, sortUp, perPage, activePage, error, modalCurrency } = this.state;
 
     return (
       <div>
@@ -165,10 +176,15 @@ class Instruments extends Component {
           handlePageChange={this.handlePageChange}
           handleHeaderClick={this.handleHeaderClick}
           handlePerPageChange={this.handlePerPageChange}
+          handleShowCurrencyDetails={this.handleShowCurrencyDetails}
         />
 
         {error && (
           <div className="error">Fetch Currencies Error - try again later</div>
+        )}
+
+        {modalCurrency && (
+          <ModalCurrency currency={modalCurrency} handleCloseModal={this.handleCloseModal} />
         )}
       </div>
     )

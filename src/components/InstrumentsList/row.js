@@ -7,13 +7,20 @@ class InstrumentsRow extends Component {
     return +(Math.round(change * pow) / pow);
   }
 
+  handleCurrencyClick = (e) => {
+    e.preventDefault();
+    this.props.handleShowCurrencyDetails(this.props.row.currency);
+  }
+
   render() {
     const { row } = this.props;
     return (
       <tr data-testid="row">
         <td className="symbol">
-          <img className="flag" src={`images/flags/${row.currency}.png`} alt={row.currency} />
-          {row.currency}
+          <a onClick={this.handleCurrencyClick}>
+            <img className="flag" src={`images/flags/${row.currency}.png`} alt={row.currency} />
+            {row.currency}
+          </a>
         </td>
         <td>{row.rate}</td>
         <td className={row.className}>{this.formatChange(row.perChange)}%</td>

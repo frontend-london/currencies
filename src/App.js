@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import Instruments from './components/Instruments';
+import Instruments from './components/InstrumentsList';
 
 class App extends Component {
   render() {

@@ -2,6 +2,14 @@ h2 {
   text-align: center;
 }
 
+a {
+  cursor: pointer;
+}
+
+a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover {
+  text-decoration: underline;
+}
+
 table {
   margin: 0 auto;
   width: 350px;

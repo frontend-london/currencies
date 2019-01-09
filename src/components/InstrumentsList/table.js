@@ -5,7 +5,7 @@ import Pagination from './pagination';
 
 class InstrumentsTable extends Component {
   render() {
-    const { sortBy, sortUp, perPage, activePage, changes, handleHeaderClick, handlePageChange, handlePerPageChange } = this.props;
+    const { sortBy, sortUp, perPage, activePage, changes, handleHeaderClick, handlePageChange, handlePerPageChange, handleShowCurrencyDetails } = this.props;
     return (
       <table>
         <thead>
@@ -16,6 +16,7 @@ class InstrumentsTable extends Component {
             <Row
               row={row}
               key={row.currency}
+              handleShowCurrencyDetails={handleShowCurrencyDetails}
             />
           )}
         </tbody>

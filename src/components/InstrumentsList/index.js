@@ -158,7 +158,8 @@ class Instruments extends Component {
   getChartData = (currency) => {
     let data = [];
     Object.keys(this.state.days).forEach((day, index) => {
-      data.push({ name: day, rate: this.state.days[day].rates[currency] });
+      let name = day;
+      data.push({ name, rate: this.state.days[day].rates[currency] });
     });
     return data;
   }
@@ -192,7 +193,13 @@ class Instruments extends Component {
         )}
 
         {modalCurrency && (
-          <ModalCurrency currency={modalCurrency} handleCloseModal={this.handleCloseModal} chartData={this.getChartData(modalCurrency)} />
+          <ModalCurrency
+            currency={modalCurrency}
+            handleCloseModal={this.handleCloseModal}
+            chartData={this.getChartData(modalCurrency)}
+            currentDate={currentDate}
+            currentPrice={this.state.days[this.state.currentDate].rates[modalCurrency]}
+          />
         )}
       </div>
     )
